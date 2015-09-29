@@ -20,10 +20,11 @@ class DirectoriesSourceFileLocator(directories: Seq[File], sourceEncoding: Strin
     extends ISourceFileLocator {
   
   override def getSourceFile(packageName: String, fileName: String) = {
-    def findInDirectory(dir: File) = Option(dirSourceLocator(dir).getSourceFile(packageName, fileName))
+    def findInDirectory(dir: File, pkg: String) = Option(dirSourceLocator(dir).getSourceFile(pkg, fileName))
     def dirSourceLocator(dir: File) = new DirectorySourceFileLocator(dir, sourceEncoding, tabWidth)
-    
-    (directories flatMap findInDirectory).headOption getOrElse null
+    def findInRootOrPackageDirectory(dir: File) =
+      findInDirectory(dir, packageName) orElse findInDirectory(dir, "")
+    (directories flatMap findInRootOrPackageDirectory).headOption getOrElse null
   }
   
   override def getTabWidth = tabWidth
