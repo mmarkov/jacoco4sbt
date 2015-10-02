@@ -15,6 +15,7 @@ import sbt._
 import Keys._
 import java.io.File
 import inc.Locate
+import de.johoop.jacoco4sbt.build.BuildInfo
 
 object JacocoPlugin extends Plugin {
 
@@ -98,7 +99,7 @@ object JacocoPlugin extends Plugin {
     def settings = Seq(
       ivyConfigurations += Config,
       libraryDependencies +=
-        "org.jacoco" % "org.jacoco.agent" % "0.7.5.201505241946" % "jacoco" artifacts(Artifact("org.jacoco.agent", "jar", "jar"))
+        "org.jacoco" % "org.jacoco.agent" % BuildInfo.jacocoVersion % "jacoco" artifacts(Artifact("org.jacoco.agent", "jar", "jar"))
     ) ++ inConfig(Config)(Defaults.testSettings ++ JacocoDefaults.settings ++ Seq(
       classesToCover <<= (classDirectory in Compile, includes, excludes) map filterClassesToCover,
       aggregateClassesToCover := submoduleSettings.value.flatMap(_._1).flatten.distinct,

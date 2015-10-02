@@ -23,14 +23,17 @@ libraryDependencies ++= Seq(
   "org.mockito" %  "mockito-all"       % "1.9.5"  % Test,
   "org.pegdown" %  "pegdown"           % "1.2.1"  % Test
 )
-   
+
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-language:_")
 
-buildInfoSettings
+enablePlugins(BuildInfoPlugin)
 
-sourceGenerators in Compile <+= buildInfo
-
-buildInfoKeys := Seq[BuildInfoKey](resourceDirectory in Test)
+buildInfoKeys := Seq[BuildInfoKey](
+  resourceDirectory in Test,
+  "jacocoVersion" -> jacocoVersion,
+  sbtVersion,
+  scalaVersion
+)
 
 buildInfoPackage := "de.johoop.jacoco4sbt.build"
 
