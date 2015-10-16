@@ -1,8 +1,4 @@
-publishTo := {
-  val r = if (isSnapshot.value) Resolver.sbtPluginRepo("snapshots")
-          else Resolver.sbtPluginRepo("releases")
-  Some(r)
-}
+publishTo := Some(Resolver.file("packages", file("/var/www/packages.meraki.com/maven")))
 
 publishMavenStyle := false
 
