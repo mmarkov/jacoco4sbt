@@ -9,11 +9,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package de.johoop.jacoco4sbt
+package com.quantcast.sbt.jacoco4sbt
 
 import org.jacoco.report.JavaNames
 import scala.reflect.NameTransformer._
-import de.johoop.jacoco4sbt.filter.ScalaForwarderDetector
+import com.quantcast.sbt.jacoco4sbt.filter.ScalaForwarderDetector
 
 class ScalaLanguageNames extends JavaNames {
   override def getPackageName(vmname: String): String =

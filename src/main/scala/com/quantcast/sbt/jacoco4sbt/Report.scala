@@ -1,6 +1,6 @@
 /*
  * This file is part of jacoco4sbt.
- * 
+ *
  * Copyright (c) 2011-2013 Joachim Hofer & contributors
  * All rights reserved.
  *
@@ -9,14 +9,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package de.johoop.jacoco4sbt
+package com.quantcast.sbt.jacoco4sbt
 
 import org.jacoco.core.data._
 import org.jacoco.core.analysis._
 
 import java.io.File
 import java.io.FileInputStream
-import de.johoop.jacoco4sbt.filter.FilteringAnalyzer
+import com.quantcast.sbt.jacoco4sbt.filter.FilteringAnalyzer
 import sbt.Keys._
 import java.text.DecimalFormat
 import org.jacoco.core.tools.ExecFileLoader

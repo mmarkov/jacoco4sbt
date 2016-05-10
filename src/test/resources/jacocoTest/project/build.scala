@@ -1,6 +1,5 @@
 import sbt._
 import Keys._
-import de.johoop.jacoco4sbt._
 import JacocoPlugin._
 
 object TopLevel extends Build

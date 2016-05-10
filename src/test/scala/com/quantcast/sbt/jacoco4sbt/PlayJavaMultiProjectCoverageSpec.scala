@@ -1,7 +1,6 @@
-package de.johoop.jacoco4sbt
+package com.quantcast.sbt.jacoco4sbt
 
 import org.specs2._
-import de.johoop.jacoco4sbt.build.BuildInfo
 import scala.sys.process.Process
 import java.io.File
 import org.specs2.matcher.{Matcher, FileMatchers}

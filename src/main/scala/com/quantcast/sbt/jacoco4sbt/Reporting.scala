@@ -1,6 +1,6 @@
 /*
  * This file is part of jacoco4sbt.
- * 
+ *
  * Copyright (c) 2011-2013 Joachim Hofer & contributors
  * All rights reserved.
  *
@@ -9,15 +9,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package de.johoop.jacoco4sbt
+package com.quantcast.sbt.jacoco4sbt
 
+import java.io.File
+
+import sbt.Keys._
 import sbt._
-import Keys._
 
 trait SavingData extends JaCoCoRuntime {
   def saveDataAction(jacocoFile: File, forked: Boolean, streams: TaskStreams) = {
 
     import java.io.FileOutputStream
+
     import org.jacoco.core.data.ExecutionDataWriter
 
     if (! forked) {
@@ -27,9 +30,9 @@ trait SavingData extends JaCoCoRuntime {
         streams.log debug ("writing execution data to " + jacocoFile)
         val executionDataWriter = new ExecutionDataWriter(executionDataStream)
         runtimeData collect (executionDataWriter, executionDataWriter, true)
-        executionDataStream.flush
+        executionDataStream.flush()
       } finally {
-        executionDataStream.close
+        executionDataStream.close()
       }
     }
   }
@@ -78,4 +81,15 @@ trait Reporting extends JaCoCoRuntime {
     def orElse(otherFileName: String): File = if (file.exists) file else new File(file.getParent, otherFileName)
   }
   implicit def fileToFileWithOrElse(f: File): FileWithOrElse = new FileWithOrElse(f)
+}
+
+trait Aggregating extends JaCoCoRuntime {
+  def mergeCoverAction(reportDirectory: File, executionDataFiles: Seq[File], streams: TaskStreams): Unit = {
+    val coverage = new AggregatedCoverage(
+      reportDirectory = reportDirectory,
+      executionDataFiles = executionDataFiles,
+      streams = streams)
+
+    coverage.generate()
+  }
 }

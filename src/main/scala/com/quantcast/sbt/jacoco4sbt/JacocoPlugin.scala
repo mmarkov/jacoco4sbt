@@ -9,17 +9,21 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package de.johoop.jacoco4sbt
+package com.quantcast.sbt.jacoco4sbt
 
 import sbt._
 import Keys._
 import java.io.File
 import inc.Locate
-import de.johoop.jacoco4sbt.build.BuildInfo
+import com.quantcast.sbt.jacoco4sbt.build.BuildInfo
+
+import sbt.Keys.{clean, _}
+import sbt._
+import sbt.inc.Locate
 
 object JacocoPlugin extends Plugin {
 
-  private object JacocoDefaults extends Reporting with Keys {
+  private object JacocoDefaults extends Reporting with Aggregating with Keys {
     val settings = Seq(
       outputDirectory := crossTarget.value / "jacoco",
       aggregateReportDirectory := outputDirectory.value / "aggregate",
@@ -45,6 +49,8 @@ object JacocoPlugin extends Plugin {
 
       aggregateReport <<= (aggregateReportDirectory, aggregateExecutionDataFiles, reportFormats, aggregateReportTitle, aggregateCoveredSources, aggregateClassesToCover,
         sourceEncoding, sourceTabWidth, aggregateThresholds, streams) map aggregateReportAction,
+
+      mergeCover <<= (aggregateReportDirectory, aggregateExecutionDataFiles, streams) map mergeCoverAction,
 
       clean <<= outputDirectory map (dir => if (dir.exists) IO delete dir.listFiles)
     )
@@ -115,7 +121,6 @@ object JacocoPlugin extends Plugin {
       definedTests <<= definedTests in srcConfig,
       definedTestNames <<= definedTestNames in srcConfig,
       cover <<= report dependsOn check,
-      aggregateCover <<= aggregateReport dependsOn (submoduleCoverTasks),
       check <<= ((executionDataFile, fork, streams) map saveDataAction) dependsOn test))
   }
 }

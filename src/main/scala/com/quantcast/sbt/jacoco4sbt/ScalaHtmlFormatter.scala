@@ -9,7 +9,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package de.johoop.jacoco4sbt
+package com.quantcast.sbt.jacoco4sbt
 
 import org.jacoco.core.analysis.ICoverageNode
 import org.jacoco.report.html.HTMLFormatter

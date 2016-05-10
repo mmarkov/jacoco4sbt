@@ -1,6 +1,6 @@
 /*
  * This file is part of jacoco4sbt.
- * 
+ *
  * Copyright (c) 2011-2013 Joachim Hofer & contributors
  * All rights reserved.
  *
@@ -9,7 +9,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package de.johoop.jacoco4sbt
+package com.quantcast.sbt.jacoco4sbt
 
 import sbt._
 import Keys._
@@ -50,10 +50,10 @@ trait Keys {
   lazy val aggregateReport = TaskKey[Unit]("aggregate-report", "Generates an aggregated JaCoCo report.")
 
   lazy val cover = TaskKey[Unit]("cover", "Executes the tests and creates a JaCoCo coverage report.")
-  lazy val aggregateCover = TaskKey[Unit]("aggregate-cover", "Executes the tests and creates a JaCoCo coverage report as well as an aggregated report which merges all sub-projects.")
 
   lazy val check = TaskKey[Unit]("check", "Executes the tests and saves the execution data in 'jacoco.exec'.")
   lazy val clean = TaskKey[Unit]("clean", "Cleaning JaCoCo's output-directory.")
+  lazy val mergeCover = TaskKey[Unit]("merge-cover", "Merge jacoco.exec from all sub projects into single ")
 }
 
 trait IntegrationTestKeys extends Keys {

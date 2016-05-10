@@ -1,6 +1,6 @@
 /*
  * This file is part of jacoco4sbt.
- * 
+ *
  * Copyright (c) 2014 Joachim Hofer & contributors
  * All rights reserved.
  *
@@ -9,7 +9,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package de.johoop.jacoco4sbt
+package com.quantcast.sbt.jacoco4sbt
 
 object Util {
   def processName = if (System.getProperty("os.name").contains("Windows")) "sbt.bat" else "sbt"

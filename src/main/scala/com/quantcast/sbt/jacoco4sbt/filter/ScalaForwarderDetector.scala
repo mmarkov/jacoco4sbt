@@ -9,7 +9,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package de.johoop.jacoco4sbt.filter
+package com.quantcast.sbt.jacoco4sbt.filter
 
 import org.objectweb.asm.Opcodes
 import org.objectweb.asm.tree.{JumpInsnNode, MethodNode, MethodInsnNode}

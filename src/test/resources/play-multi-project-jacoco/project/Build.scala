@@ -1,7 +1,6 @@
 import sbt._
 import play.Project._
 import Keys._
-import de.johoop.jacoco4sbt.JacocoPlugin._
 
 
 object ApplicationBuild extends Build {

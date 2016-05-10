@@ -2,9 +2,11 @@ sbtPlugin := true
 
 name := "jacoco4sbt"
 
-organization := "de.johoop"
+organization := "com.quantcast.sbt"
 
-version := "2.1.7-meraki-SNAPSHOT"
+versionMajor := "2.1.7-qc"
+
+versionFormat := "M.B.d"
 
 resolvers += "Sonatype Release" at "https://oss.sonatype.org/content/repositories/releases"
 
@@ -27,6 +29,9 @@ libraryDependencies ++= Seq(
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-language:_")
 
 enablePlugins(BuildInfoPlugin)
+enablePlugins(DateVersionPlugin)
+
+publishTo := Some(Resolver.file("file", new File("./target/output")))
 
 buildInfoKeys := Seq[BuildInfoKey](
   resourceDirectory in Test,
@@ -35,8 +40,10 @@ buildInfoKeys := Seq[BuildInfoKey](
   scalaVersion
 )
 
-buildInfoPackage := "de.johoop.jacoco4sbt.build"
+buildInfoPackage := "com.quantcast.sbt.jacoco4sbt.build"
 
 test in Test <<= test in Test dependsOn publishLocal
 
 parallelExecution in Test := false
+
+
